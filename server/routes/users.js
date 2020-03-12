@@ -4,9 +4,7 @@ const { User } = require("../models/User");
 
 const { auth } = require("../middleware/auth");
 
-//=================================
-//             User
-//=================================
+/////User
 
 router.get("/auth", auth, (req, res) => {
     res.status(200).json({
