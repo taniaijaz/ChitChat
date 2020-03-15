@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+//to communicate b/w backend and front end we enable this bcz ports are different
 const cors = require('cors')
 
 const bodyParser = require("body-parser");
