@@ -6,7 +6,8 @@ import LandingPage from "./views/LandingPage/LandingPage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import NavBar from "./views/NavBar/NavBar";
-import Footer from "./views/Footer/Footer"
+import Footer from "./views/Footer/Footer";
+import ChatPage from "./views/ChatPage/ChatPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <div style={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
         <Switch>
           <Route exact path="/" component={Auth(LandingPage, null)} />
+          <Route exact path="/chat" component={Auth(ChatPage, null)} />
           <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
         </Switch>
