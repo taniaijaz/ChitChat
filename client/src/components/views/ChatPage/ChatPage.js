@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, Icon, Input, Button, Row, Col, } from 'antd';
 import io from "socket.io-client";
-import { connect } from "react-redux";
+import { connect } from "react-redux"; //getting info from redux
 import  moment  from "moment";
 
 export class ChatPage extends Component {
@@ -12,7 +12,7 @@ export class ChatPage extends Component {
     componentDidMount() {
         let server = "http://localhost:5000";
 
-        this.socket = io(server);
+        this.socket = io(server); //connect client to server
 
         this.socket.on("Output Chat Message", messageFromBackEnd => {
             console.log(messageFromBackEnd)
@@ -26,15 +26,16 @@ export class ChatPage extends Component {
     }
 
     submitChatMessage = (e) => {
-        e.preventDefault();
+        e.preventDefault(); //Now what kind of value i want to send to the server 
+        //geeting from props
 
         let chatMessage = this.state.chatMessage
         let userId = this.props.user.userData._id
         let userName = this.props.user.userData.name;
         let userImage = this.props.user.userData.image;
-        let nowTime = moment();
+        let nowTime = moment(); // for current time we send the message
         let type = "Image"
-
+//now have to send the message to the server
         this.socket.emit("Input Chat Message", {
             chatMessage,
             userId,
@@ -43,14 +44,14 @@ export class ChatPage extends Component {
             nowTime,
             type
         });
-        this.setState({ chatMessage: "" })
+        this.setState({ chatMessage: "" }) //put value back 
     }
 
     render() {
         return (
             <React.Fragment>
                 <div>
-                    <p style={{ fontSize: '2rem', textAlign: 'center' }}> Real Time Chat</p>
+                    <p style={{ fontSize: '2rem', textAlign: 'center' }}> Chit Chat</p>
                 </div>
 
                 <div style={{ maxWidth: '800px', margin: '0 auto' }}>
