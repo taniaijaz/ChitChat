@@ -3,6 +3,7 @@ import { Form, Icon, Input, Button, Row, Col, } from 'antd';
 import io from "socket.io-client";
 import { connect } from "react-redux"; //getting info from redux
 import  moment  from "moment";
+import {getChats} from "../../../_actions/chat_actions"
 
 export class ChatPage extends Component {
     state= {
@@ -11,6 +12,7 @@ export class ChatPage extends Component {
 
     componentDidMount() {
         let server = "http://localhost:5000";
+        this.props.dispatch(getChats());
 
         this.socket = io(server); //connect client to server
 
@@ -25,6 +27,16 @@ export class ChatPage extends Component {
         })
     }
 
+
+    renderCards=()=>{
+        this.props.chats.chats &&
+        this.props.chats.chats.map((chat,i)=>{
+            <ChatCard/>
+
+        })
+
+    }
+
     submitChatMessage = (e) => {
         e.preventDefault(); //Now what kind of value i want to send to the server 
         //geeting from props
@@ -34,7 +46,7 @@ export class ChatPage extends Component {
         let userName = this.props.user.userData.name;
         let userImage = this.props.user.userData.image;
         let nowTime = moment(); // for current time we send the message
-        let type = "Image"
+        let type = "Text"
 //now have to send the message to the server
         this.socket.emit("Input Chat Message", {
             chatMessage,
@@ -56,9 +68,9 @@ export class ChatPage extends Component {
 
                 <div style={{ maxWidth: '800px', margin: '0 auto' }}>
                     <div className="infinite-container">
-                        {/* {this.props.chats && (
+                         {this.props.chats && (
                             <div>{this.renderCards()}</div>
-                        )} */}
+                        )} }
                         <div
                             ref={el => {
                                 this.messagesEnd = el;
@@ -98,7 +110,8 @@ export class ChatPage extends Component {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user,
+        Chats: state.chat
     }
 }
 

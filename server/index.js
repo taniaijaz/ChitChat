@@ -47,6 +47,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use('/api/users', require('./routes/users'));
+app.use('/api/chat', require('./routes/chat'));
+
 
 //getting data comming from client and saving to mongo
 io.on("connection",socket=>{
