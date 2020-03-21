@@ -4,6 +4,7 @@ import io from "socket.io-client";
 import { connect } from "react-redux"; //getting info from redux
 import  moment  from "moment";
 import {getChats} from "../../../_actions/chat_actions"
+import ChatCard from "./Sections/ChatCard"
 
 export class ChatPage extends Component {
     state= {
@@ -30,10 +31,10 @@ export class ChatPage extends Component {
 
     renderCards=()=>{
         this.props.chats.chats &&
-        this.props.chats.chats.map((chat,i)=>{
-            <ChatCard/>
+        this.props.chats.chats.map((chat)=>(
+             <ChatCard key={chat._id}  {...chat}   />
 
-        })
+        ))
 
     }
 
