@@ -1,1 +1,1 @@
-web: npm stat dev
+web: node index.js
