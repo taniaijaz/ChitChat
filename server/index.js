@@ -28,8 +28,9 @@ const mongoose = require("mongoose");
 //   })
 //   .then(() => console.log('MongoDB Connected...'))
 //   .catch(err => console.log(err));
+const dbc =require("./config/dev").mongoURI;
   mongoose
-  .connect(config.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(dbc, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(console.log("Database Connection Established!"))
   .catch(err => console.log(err));
 mongoose.Promise = global.Promise;
