@@ -19,6 +19,7 @@
   "author": "tania ijaz",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^4.1.0",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
