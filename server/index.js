@@ -28,7 +28,7 @@ const mongoose = require("mongoose");
 //   })
 //   .then(() => console.log('MongoDB Connected...'))
 //   .catch(err => console.log(err));
-const dbc =require("./config/dev").mongoURI;
+const dbc =require("./config/key").mongoURI;
   mongoose
   .connect(dbc, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(console.log("Database Connection Established!"))
