@@ -59,12 +59,12 @@ io.on("connection",socket=>{
 let chat =new Chat({ message :msg.chatMessage , sender:msg.userId,type:msg.type})
 
 chat.save((err,doc)=>{
-  if(err)return res.json({success:false,err})
+  if(err)return res.json({success:false,err}) //if error in saving data into database then get json file format
 
   Chat.find({ "_id" : doc._id})
   .populate("sender")
   .exec((err,doc)=>{
-    return io.emit("Outpu Chat Message", doc)
+    return io.emit("Outpu Chat Message", doc) //sending back to client
   })
 })
       }catch{error}{

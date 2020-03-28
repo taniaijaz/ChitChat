@@ -3,8 +3,10 @@ import { Form, Icon, Input, Button, Row, Col, } from 'antd';
 import io from "socket.io-client";
 import { connect } from "react-redux"; //getting info from redux
 import  moment  from "moment";
-import {getChats} from "../../../_actions/chat_actions"
+import {getChats,afterPostMessage} from "../../../_actions/chat_actions"
 import ChatCard from "./Sections/ChatCard"
+import Dropzone from 'react-dropzone';
+import Axios from 'axios';
 
 export class ChatPage extends Component {
     state= {
@@ -13,15 +15,19 @@ export class ChatPage extends Component {
 
     componentDidMount() {
         let server = "http://localhost:5000";
-        this.props.dispatch(getChats());
+        this.props.dispatch(getChats()); //to get data from mongodb
 
         this.socket = io(server); //connect client to server
 
+        //Getting chat from server
         this.socket.on("Output Chat Message", messageFromBackEnd => {
-            console.log(messageFromBackEnd)
+             console.log(messageFromBackEnd)
+            this.props.dispatch(afterPostMessage(messageFromBackEnd));
         })
     }
-
+    componentDidUpdate() {
+        this.messagesEnd.scrollIntoView({ behavior: 'smooth' });
+    }
     hanleSearchChange =(e) => {
         this.setState({
             chatMessage: e.target.value
@@ -38,6 +44,45 @@ export class ChatPage extends Component {
 
     }
 
+    onDrop = (files) => {
+        console.log(files)
+
+
+        if (this.props.user.userData && !this.props.user.userData.isAuth) {
+            return alert('Please Log in first');
+        }
+
+
+
+        let formData = new FormData;
+
+        const config = {
+            header: { 'content-type': 'multipart/form-data' }
+        }
+
+        formData.append("file", files[0])
+
+        Axios.post('api/chat/uploadfiles', formData, config)
+            .then(response => {
+                if (response.data.success) {
+                    let chatMessage = response.data.url;
+                    let userId = this.props.user.userData._id
+                    let userName = this.props.user.userData.name;
+                    let userImage = this.props.user.userData.image;
+                    let nowTime = moment();
+                    let type = "VideoOrImage"
+
+                    this.socket.emit("Input Chat Message", {
+                        chatMessage,
+                        userId,
+                        userName,
+                        userImage,
+                        nowTime,
+                        type
+                    });
+                }
+            })
+    }
     submitChatMessage = (e) => {
         e.preventDefault(); //Now what kind of value i want to send to the server 
         //geeting from props
@@ -57,7 +102,7 @@ export class ChatPage extends Component {
             nowTime,
             type
         });
-        this.setState({ chatMessage: "" }) //put value back 
+        this.setState({ chatMessage: "" }) //put value back to our page
     }
 
     render() {
@@ -71,7 +116,7 @@ export class ChatPage extends Component {
                     <div className="infinite-container">
                          {this.props.chats && (
                             <div>{this.renderCards()}</div>
-                        )} }
+                        )} 
                         <div
                             ref={el => {
                                 this.messagesEnd = el;
@@ -93,6 +138,18 @@ export class ChatPage extends Component {
                                 />
                             </Col>
                             <Col span={2}>
+                            <Dropzone onDrop={this.onDrop}>
+                                    {({ getRootProps, getInputProps }) => (
+                                        <section>
+                                            <div {...getRootProps()}>
+                                                <input {...getInputProps()} />
+                                                <Button>
+                                                    <Icon type="upload" />
+                                                </Button>
+                                            </div>
+                                        </section>
+                                    )}
+                                </Dropzone>
                                 
                             </Col>
 
