@@ -4,8 +4,8 @@ const { Chat } = require("../models/Chat");
 
 // const { auth } = require("../middleware/auth");
 //to get chat data from chat model
-router.get("/getchats", (req, res) => {
-Chat.find()
+router.get("/getchats",async (req, res) => {
+await Chat.find()
 .populate("sender")
 .exec((err,chats)=>{
     if(err) return res.status(400).send(err)

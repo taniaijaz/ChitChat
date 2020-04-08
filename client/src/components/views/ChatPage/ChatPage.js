@@ -86,6 +86,9 @@ export class ChatPage extends Component {
     submitChatMessage = (e) => {
         e.preventDefault(); //Now what kind of value i want to send to the server 
         //geeting from props
+        if (this.props.user.userData && !this.props.user.userData.isAuth) {
+            return alert('Please Log in first');
+        }
 
         let chatMessage = this.state.chatMessage
         let userId = this.props.user.userData._id
@@ -112,8 +115,8 @@ export class ChatPage extends Component {
                     <p style={{ fontSize: '2rem', textAlign: 'center' }}> Chit Chat</p>
                 </div>
 
-                <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-                    <div className="infinite-container">
+                <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+                    <div className="infinite-container"  style={{ height: '400px', overflowY: 'scroll' }}>
                          {this.props.chats && (
                             <div>{this.renderCards()}</div>
                         )} 
