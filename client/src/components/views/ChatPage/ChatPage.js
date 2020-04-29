@@ -54,7 +54,7 @@ export class ChatPage extends Component {
 
 
 
-        let formData = new FormData;
+        let formData = new FormData();
 
         const config = {
             header: { 'content-type': 'multipart/form-data' }
