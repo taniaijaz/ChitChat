@@ -90,12 +90,12 @@ function RegisterPage(props) {
           values,
           touched,
           errors,
-          dirty,
+          // dirty,
           isSubmitting,
           handleChange,
           handleBlur,
           handleSubmit,
-          handleReset,
+          // hand leReset,
         } = props;
         return (
           <div className="app">
