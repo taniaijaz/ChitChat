@@ -10,6 +10,8 @@ const server=require("http").createServer(app);//creayting server
 const io=require('socket.io')(server);
 
 const config = require("./config/key");
+const exphbr= require('express-handlebar');
+const nodemailer= require('nodemailer');
 
 const {Chat}=require("./models/Chat")
 // const confi = require("./config/dev");
@@ -52,6 +54,7 @@ const { auth } = require("./middleware/auth");
 
 app.use('/api/users', require('./routes/users'));
 app.use('/api/chat', require('./routes/chat'));
+app.use('/api/chat', require('.routes/forgot'));
 
 
 
