@@ -93,8 +93,8 @@ export class ChatPage extends Component {
             return alert('Please Log in first');
         }
 
-        let chatMessage = this.state.chatMessage
-        let userId = this.props.user.userData._id
+        let chatMessage = this.state.chatMessage;
+        let userId = this.props.user.userData._id;
         let userName = this.props.user.userData.name;
         let userImage = this.props.user.userData.image;
         let nowTime = moment(); // for current time we send the message
