@@ -18,6 +18,9 @@ export class ChatPage extends Component {
         this.props.dispatch(getChats()); //to get data from mongodb
 
         this.socket = io(server); //connect client to server
+              // Check for connection
+            //   if(socket !== undefined){
+            //     console.log('Connected to socket...')}
 
         //Getting chat from server
         this.socket.on("Output Chat Message", messageFromBackEnd => {

@@ -10,10 +10,10 @@ const server=require("http").createServer(app);//creayting server
 const io=require('socket.io')(server);
 
 const config = require("./config/key");
-const exphbr= require('express-handlebar');
+// const exphbr= require('express-handlebar');
 const nodemailer= require('nodemailer');
-
-const {Chat}=require("./models/Chat")
+ const users=require("./models/User");
+const {Chat} =require ("./models/Chat")
 // const confi = require("./config/dev");
 
 // const mongoose = require("mongoose");
@@ -54,7 +54,7 @@ const { auth } = require("./middleware/auth");
 
 app.use('/api/users', require('./routes/users'));
 app.use('/api/chat', require('./routes/chat'));
-app.use('/api/chat', require('.routes/forgot'));
+// app.use('/api/chat', require('.routes/forgot'));
 
 
 
@@ -92,7 +92,7 @@ io.on("connection",socket=>{
   socket.on("Input Chat Messege",msg=>{
     connect.then(db=>{
       try{
-let chat =new Chat({ message :msg.chatMessage , sender:msg.userId,type:msg.type})
+let chat =new Chat({ message :msg.chatMessage , sender:msg.userId, type:msg.type})
 
 chat.save((err,doc)=>{
   if(err)return res.json({success:false,err}) //if error in saving data into database then get json file format
