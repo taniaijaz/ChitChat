@@ -24,7 +24,7 @@ export class ChatPage extends Component {
 
         //Getting chat from server
         this.socket.on("Output Chat Message", messageFromBackEnd => {
-             console.log(messageFromBackEnd)
+             console.log(messageFromBackEnd);
             this.props.dispatch(afterPostMessage(messageFromBackEnd));
         })
     }
@@ -94,6 +94,7 @@ export class ChatPage extends Component {
         }
 
         let chatMessage = this.state.chatMessage;
+        
         let userId = this.props.user.userData._id;
         let userName = this.props.user.userData.name;
         let userImage = this.props.user.userData.image;

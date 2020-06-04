@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "concurrently \"npm run backendsrv\" \"npm run start --prefix client\"",
-    "backendsrv": "node server/index.js",
+    "backendsrv": "nodemon server/index.js",
     "start-srv": "node server/index.js",
     "backend": "nodemon server/index.js",
     "frontend": "npm run start --prefix client",

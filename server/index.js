@@ -14,22 +14,9 @@ const config = require("./config/key");
 const nodemailer= require('nodemailer');
  const users=require("./models/User");
 const {Chat} =require ("./models/Chat")
-// const confi = require("./config/dev");
 
-// const mongoose = require("mongoose");
-// mongoose
-//   .connect(config.mongoURI, { useNewUrlParser: true })
-//   .then(() => console.log("DB connected"))
-//   .catch(err => console.error(err));
 
 const mongoose = require("mongoose");
-// const connect = mongoose.connect(config.mongoURI,
-//   {
-//     useNewUrlParser: true, useUnifiedTopology: true,
-//     useCreateIndex: true, useFindAndModify: false
-//   })
-//   .then(() => console.log('MongoDB Connected...'))
-//   .catch(err => console.log(err));
 const dbc =require("./config/key").mongoURI;
   mongoose
   .connect(dbc, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -89,25 +76,35 @@ app.post("/api/chat/uploadfiles", auth ,(req, res) => {
 });
 //getting data comming from client and saving to mongo
 io.on("connection",socket=>{
-  socket.on("Input Chat Messege",msg=>{
-    connect.then(dbc=>{
+  socket.on("Input Chat Message",async msg=>{
+    // connect.then(dbc=>{
       try{
-let chat =new Chat({ message :msg.chatMessage , sender:msg.userId, type:msg.type})
+        let chat = await Chat.create({message :msg.chatMessage , sender:msg.userId, type:msg.type})
+        // let chat =new Chat({ message :msg.chatMessage , sender:msg.userId, type:msg.type})
 
-chat.save((err,doc)=>{
+        if (chat) {
+          chat   = await Chat.find({ "_id" : chat._id})
+  .populate("sender");
+          if (chat) { console.log(chat); return io.emit("Output Chat Message", chat) }//sending back to client
+
+        }
+/*
+        chat.save((err,doc)=>{
   if(err)return res.json({success:false,err}) //if error in saving data into database then get json file format
 
   Chat.find({ "_id" : doc._id})
   .populate("sender")
   .exec((err,doc)=>{
+    if (err) {console.log('error is on line 91')};
     return io.emit("Outpu Chat Message", doc) //sending back to client
   })
-})
-      }catch{error}{
-        console.error(error)
+
+})*/
+      }catch(ex){
+        console.log(ex)
 
       }
-    })
+    // })
   })
 })
 
