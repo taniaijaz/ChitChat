@@ -90,7 +90,7 @@ app.post("/api/chat/uploadfiles", auth ,(req, res) => {
 //getting data comming from client and saving to mongo
 io.on("connection",socket=>{
   socket.on("Input Chat Messege",msg=>{
-    connect.then(db=>{
+    connect.then(dbc=>{
       try{
 let chat =new Chat({ message :msg.chatMessage , sender:msg.userId, type:msg.type})
 
