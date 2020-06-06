@@ -33,6 +33,7 @@
     "react-dropzone": "^10.2.2",
     "react-redux": "^5.0.7",
     "saslprep": "^1.0.3",
+    "serve": "^11.3.2",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
