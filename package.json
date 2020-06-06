@@ -4,8 +4,8 @@
   "description": "chit chat",
   "main": "index.js",
   "engine": {
-    "node": "10.16.0",
-    "npm": "6.9.0"
+    "node": "12.14.1",
+    "npm": "6.13.4"
   },
   "scripts": {
     "start": "concurrently \"npm run backendsrv\" \"npm run start --prefix client\"",
