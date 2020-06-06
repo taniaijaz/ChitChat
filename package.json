@@ -8,7 +8,7 @@
     "npm": "6.13.4"
   },
   "scripts": {
-    "start": "concurrently \"npm run backendsrv\" \"npm run start --prefix client\"",
+    "start": "concurrently \"npm run start-srv\" \"npm run start --prefix client\"",
     "backendsrv": "nodemon server/index.js",
     "start-srv": "node server/index.js",
     "backend": "nodemon server/index.js",

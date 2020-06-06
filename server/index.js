@@ -1,3 +1,5 @@
+// "start": "react-scripts start",
+
 const express = require("express");
 const app = express();
 const path = require("path");
