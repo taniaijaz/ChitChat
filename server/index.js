@@ -1,4 +1,6 @@
 // "start": "react-scripts start",
+// "build": "react-scripts build",
+//  "start": "serve -s build",
 
 const express = require("express");
 const app = express();
@@ -20,8 +22,9 @@ const {Chat} =require ("./models/Chat")
 
 const mongoose = require("mongoose");
 const dbc =require("./config/key").mongoURI;
+// mongoose.set('useCreateIndex', true);
   mongoose
-  .connect(dbc, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(dbc, { useNewUrlParser: true,useCreateIndex: true, useUnifiedTopology: true })
   .then(console.log("Database Connection Established!"))
   .catch(err => console.log(err));
 mongoose.Promise = global.Promise;
@@ -90,18 +93,18 @@ io.on("connection",socket=>{
           if (chat) { console.log(chat); return io.emit("Output Chat Message", chat) }//sending back to client
 
         }
-/*
-        chat.save((err,doc)=>{
-  if(err)return res.json({success:false,err}) //if error in saving data into database then get json file format
+////////wait
+//         chat.save((err,doc)=>{
+//   if(err)return res.json({success:false,err}) //if error in saving data into database then get json file format
 
-  Chat.find({ "_id" : doc._id})
-  .populate("sender")
-  .exec((err,doc)=>{
-    if (err) {console.log('error is on line 91')};
-    return io.emit("Outpu Chat Message", doc) //sending back to client
-  })
+//   Chat.find({ "_id" : doc._id})
+//   .populate("sender")
+//   .exec((err,doc)=>{
+//     if (err) {console.log('error is on line 91')};
+//     return io.emit("Outpu Chat Message", doc) //sending back to client
+//   })
 
-})*/
+// })
       }catch(ex){
         console.log(ex)
 
