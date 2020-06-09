@@ -3,8 +3,8 @@ import { Form, Icon, Input, Button, Row, Col, } from 'antd';
 import io from "socket.io-client";
 import { connect } from "react-redux"; //getting info from redux
 import  moment  from "moment";
-import {getChats,afterPostMessage} from "../../../_actions/chat_actions"
-import ChatCard from "./Sections/ChatCard"
+import {getChats,afterPostMessage} from "../../../_actions/chat_actions";
+import ChatCard from "./Sections/ChatCard";
 import Dropzone from 'react-dropzone';
 import Axios from 'axios';
 
@@ -24,7 +24,8 @@ export class ChatPage extends Component {
 
         //Getting chat from server
         this.socket.on("Output Chat Message", messageFromBackEnd => {
-             console.log(messageFromBackEnd);
+            console.log('messageFromBackEnd',messageFromBackEnd);
+            //  console.log(messageFromBackEnd);
             this.props.dispatch(afterPostMessage(messageFromBackEnd));
         })
     }
@@ -39,11 +40,11 @@ export class ChatPage extends Component {
 
 
     renderCards=()=>{
-        this.props.chats.chats &&
-        this.props.chats.chats.map((chat)=>(
+        this.props.chats.chats 
+        && this.props.chats.chats.map((chat)=>(
              <ChatCard key={chat._id} 
               {...chat} 
-              user={chat.sender}  />
+                />
 
         ))
 
