@@ -14,7 +14,7 @@ router.get("/getChats",async (req, res) => {
   .exec((err,chats)=>{
     if(err) return res.status(400).send(err)
     else{
-      console.log(chats)
+      // console.log(chats)
      res.status(200).send(chats)
     }
  })

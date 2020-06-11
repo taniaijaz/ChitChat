@@ -26,7 +26,7 @@ export class ChatPage extends Component {
         this.socket.on("Output Chat Message", messageFromBackEnd => {
             console.log('messageFromBackEnd',messageFromBackEnd);
             //  console.log(messageFromBackEnd);
-            this.props.dispatch(afterPostMessage(messageFromBackEnd));
+             this.props.dispatch(afterPostMessage(messageFromBackEnd));
         })
     }
     componentDidUpdate() {
@@ -39,7 +39,7 @@ export class ChatPage extends Component {
     }
 
 
-    renderCards=()=>{
+     renderCards=()=>{
         this.props.chats.chats 
         && this.props.chats.chats.map((chat)=>(
              <ChatCard key={chat._id} 
@@ -125,7 +125,7 @@ export class ChatPage extends Component {
                 <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
                     <div className="infinite-container"  style={{ height: '400px', overflowY: 'scroll' }}>
                          {this.props.chats && (
-                            <div>{this.renderCards()}</div>
+                            this.renderCards()
                         )} 
                         <div
                             ref={el => {
