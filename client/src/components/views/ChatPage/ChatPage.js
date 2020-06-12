@@ -41,12 +41,13 @@ export class ChatPage extends Component {
 
      renderCards=()=>
         
-        this.props.chats.Chats
+        this.props.chats.chats
         &&
          this.props.chats.chats.map((chat)=>(
-             <ChatCard key={chat._id}  {...chat} 
+            //  <ChatCard key={chat._id}  {...chat} 
               
-                />
+            //     />
+            <ChatPage />
 
         ))
 
@@ -126,7 +127,7 @@ export class ChatPage extends Component {
 
                 <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
                     <div className="infinite-container"  style={{ height: '400px', overflowY: 'scroll' }}>
-                         {this.props.chats && (
+                         {this.props.chat && (
                              this.renderCards()
                         )} 
                         <div

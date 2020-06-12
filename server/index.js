@@ -84,33 +84,35 @@ io.on("connection",socket=>{
   socket.on("Input Chat Message",async msg=>{
     // connect.then(dbc=>{
       try{
-        let chat = await Chat.create({message :msg.chatMessage , sender:msg.userId, type:msg.type})
-        // let chat =new Chat({ message :msg.chatMessage , sender:msg.userId, type:msg.type})
+      //   let chat = await Chat.create({message :msg.chatMessage , sender:msg.userId, type:msg.type})
+         let chat =new Chat({ message :msg.chatMessage , sender:msg.userId, type:msg.type})
 
-        if (chat) {
-          chat   = await Chat.find({ "_id" : chat._id})
-  .populate("sender");
-          if (chat) { console.log(chat); return io.emit("Output Chat Message", chat) }//sending back to client
+  //       if (chat) {
+  //         chat   = await Chat.find({ "_id" : chat._id})
+  // .populate("sender");
+  //         if (chat) { console.log(chat); return io.emit("Output Chat Message", chat) }//sending back to client
 
-        }
+  //       }
 ////////wait
-//         chat.save((err,doc)=>{
-//   if(err)return res.json({success:false,err}) //if error in saving data into database then get json file format
+      chat.save((err,chat)=>{
+        console.log(chat)
+ if(err)return res.json({success:false,err}) //if error in saving data into database then get json file format
 
-//   Chat.find({ "_id" : doc._id})
-//   .populate("sender")
-//   .exec((err,doc)=>{
-//     if (err) {console.log('error is on line 91')};
-//     return io.emit("Outpu Chat Message", doc) //sending back to client
-//   })
+ Chat.find({ "_id" : chat._id})
+  .populate("sender")
+  .exec((err,chat)=>{
+   if (err) {console.log('error is on line 91')};
+   return io.emit("Output Chat Message", chat) //sending back to client
+  })
 
-// })
-      }catch(ex){
+})
+      }
+ catch(ex){
         console.log(ex)
 
       }
-    // })
-  })
+      })
+  // })
 })
 
 
