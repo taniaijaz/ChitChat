@@ -43,9 +43,10 @@ export class ChatPage extends Component {
     
 renderCards = () =>
 
-        this.props.Chats.Chats
-        && this.props.Chats.Chats.map((chat) => (
+        this.props.Chats.chats
+        && this.props.Chats.chats.map((chat) => (
             <ChatCard
+            key={chat.id} {...chat}
             />
             
         ))
