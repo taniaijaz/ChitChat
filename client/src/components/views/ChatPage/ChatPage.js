@@ -7,6 +7,7 @@ import {getChats,afterPostMessage} from "../../../_actions/chat_actions";
 import ChatCard from "./Sections/ChatCard";
 import Dropzone from 'react-dropzone';
 import Axios from 'axios';
+import reactDOM from 'react-dom';
 
 export class ChatPage extends Component {
     state= {
@@ -38,21 +39,19 @@ export class ChatPage extends Component {
         })
     }
 
+// console.log(this.props)
+    
+renderCards = () =>
 
-     renderCards=()=>
-        
-        this.props.chats.chats
-        &&
-         this.props.chats.chats.map((chat)=>(
-            //  <ChatCard key={chat._id}  {...chat} 
-              
-            //     />
-            <ChatPage />
-
+        this.props.Chats.Chats
+        && this.props.Chats.Chats.map((chat) => (
+            <ChatCard
+            />
+            
         ))
 
     
-
+   
     onDrop = (files) => {
         console.log(files)
 
@@ -63,7 +62,7 @@ export class ChatPage extends Component {
 
 
 
-        let formData = new FormData();
+        let formData = new FormData;
 
         const config = {
             header: { 'content-type': 'multipart/form-data' }
@@ -119,17 +118,23 @@ export class ChatPage extends Component {
     }
 
     render() {
+        //  console.log(this.props)
         return (
             <React.Fragment>
+                
                 <div>
                     <p style={{ fontSize: '2rem', textAlign: 'center' }}> Chit Chat</p>
+
+                    
                 </div>
 
                 <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
                     <div className="infinite-container"  style={{ height: '400px', overflowY: 'scroll' }}>
-                         {this.props.chat && (
+                            {this.props.Chats && (
                              this.renderCards()
-                        )} 
+                           )}
+                        
+                       
                         <div
                             ref={el => {
                                 this.messagesEnd = el;

@@ -7,7 +7,7 @@ import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer";
-import ChatPage from "./views/ChatPage/ChatPage";
+import ChatPage from "./views/ChatPage/ChatPage.js";
 
 function App() {
   return (
