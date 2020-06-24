@@ -82,9 +82,9 @@ function ChatCard(props) {
                                 alt="img"
                             />
                         :
-                        <span style={{backgroundColor:'rgba(0,0,0,.25)'}}>
+                        <p style={{color:'#000'}}>
                             {props.message}
-                        </span>
+                        </p>
                 }
                 datetime={
                     <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
