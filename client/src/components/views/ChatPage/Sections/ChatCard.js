@@ -2,7 +2,7 @@ import React from "react";
 import moment from 'moment';
 import { Comment, Tooltip, Avatar, Divider } from 'antd';
 import ReactEmoji from 'react-emoji';
-import './Chat.css'; 
+import './Chat.css';
 // function ChatCard(props) {
 //     return (
 //         <div style={{ width: '100%' }}>
@@ -82,9 +82,9 @@ function ChatCard(props) {
                                 alt="img"
                             />
                         :
-                        <p>
+                        <span style={{backgroundColor:'rgba(0,0,0,.25)'}}>
                             {props.message}
-                        </p>
+                        </span>
                 }
                 datetime={
                     <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
