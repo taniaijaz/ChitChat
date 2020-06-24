@@ -2,7 +2,7 @@ import React from "react";
 import moment from 'moment';
 import { Comment, Tooltip, Avatar, Divider } from 'antd';
 import ReactEmoji from 'react-emoji';
-import './Chat.css';
+import './Chat.css'; 
 // function ChatCard(props) {
 //     return (
 //         <div style={{ width: '100%' }}>
