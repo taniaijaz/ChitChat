@@ -77,7 +77,7 @@ function ChatCard(props) {
                             />
                             :
                             <img
-                                style={{ maxWidth: '200px' }}
+                                style={{ maxWidth: '201px' }}
                                 src={`http://localhost:5000/${props.message}`}
                                 alt="img"
                             />
